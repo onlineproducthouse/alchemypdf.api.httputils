@@ -12,12 +12,17 @@ go get github.com/onlineproducthouse/alchemypdf.api.httputils
 Import the package:
 
 ```go
-import alchemypdfapihttputils "github.com/onlineproducthouse/alchemypdf.api.httputils"
+import (
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httperror"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httprequtil"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpresponse"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
+)
 ```
 
 Call a method:
 ```go
-statusCode, statusCodeText := alchemypdfapihttputils.Ok()
+statusCode, statusCodeText := httpstatus.Ok()
 ```
 
 ## Unit tests
