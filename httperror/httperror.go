@@ -1,4 +1,6 @@
-package alchemypdfapihttputils
+package httperror
+
+import "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
 
 const (
 	NoErrStr             string = "Ok"                  // status 200
@@ -29,22 +31,22 @@ type AppError struct {
 }
 
 func ValidationErr(msg, op string, err error) *AppError {
-	code, _ := BadRequest()
+	code, _ := httpstatus.BadRequest()
 	return &AppError{ValidationErrStr, msg, op, code, err}
 }
 
 func AuthErr(msg, op string, err error) *AppError {
-	code, _ := Unauthorized()
+	code, _ := httpstatus.Unauthorized()
 	return &AppError{AuthErrStr, msg, op, code, err}
 }
 
 func ForbiddenErr(msg, op string, err error) *AppError {
-	code, _ := Forbidden()
+	code, _ := httpstatus.Forbidden()
 	return &AppError{ForbiddenErrStr, msg, op, code, err}
 }
 
 func NotFoundErr(msg, op string, err error) *AppError {
-	code, text := NotFound()
+	code, text := httpstatus.NotFound()
 
 	if msg != "" {
 		text = msg
@@ -54,22 +56,22 @@ func NotFoundErr(msg, op string, err error) *AppError {
 }
 
 func ResorceLockedErr(msg, op string, err error) *AppError {
-	code, _ := Locked()
+	code, _ := httpstatus.Locked()
 	return &AppError{ResorceLockedErrStr, msg, op, code, err}
 }
 
 func UnknownErr(msg, op string, err error) *AppError {
-	code, _ := InternalServerError()
+	code, _ := httpstatus.InternalServerError()
 	return &AppError{UnknownErrStr, msg, op, code, err}
 }
 
 func NotImplementedErr(op string) *AppError {
-	code, text := NotImplementedError()
+	code, text := httpstatus.NotImplementedError()
 	return &AppError{NotImplementedErrStr, text, op, code, nil}
 }
 
 func Deprecated(op string) *AppError {
-	code, text := DeprecatedError()
+	code, text := httpstatus.DeprecatedError()
 	return &AppError{DeprecatedErrStr, text, op, code, nil}
 }
 

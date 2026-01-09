@@ -1,4 +1,4 @@
-package alchemypdfapihttputils
+package httpstatus
 
 func Ok() (int, string) {
 	return 200, "Ok"

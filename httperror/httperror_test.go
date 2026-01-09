@@ -1,10 +1,12 @@
-package alchemypdfapihttputils
+package httperror_test
 
 import (
 	"errors"
 	"testing"
 
 	"github.com/onlineproducthouse/alchemypdf.api.httputils/helpers/asserterrmsg"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/httperror"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
 )
 
 func TestValidationErr(t *testing.T) {
@@ -13,13 +15,13 @@ func TestValidationErr(t *testing.T) {
 	innerMsg := "Inner Testing Validation Error"
 	originalErr := errors.New(innerMsg)
 
-	err := ValidationErr(msg, op, originalErr)
+	err := httperror.ValidationErr(msg, op, originalErr)
 
-	if err.Kind() != ValidationErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", ValidationErrStr, err.Kind()))
+	if err.Kind() != httperror.ValidationErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.ValidationErrStr, err.Kind()))
 	}
 
-	code, _ := BadRequest()
+	code, _ := httpstatus.BadRequest()
 	if err.StatusCode() != code {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error StatusCode", code, err.StatusCode()))
 	}
@@ -43,10 +45,10 @@ func TestAuthErr(t *testing.T) {
 	innerMsg := "Inner Testing Auth Error"
 	originalErr := errors.New(innerMsg)
 
-	err := AuthErr(msg, op, originalErr)
+	err := httperror.AuthErr(msg, op, originalErr)
 
-	if err.Kind() != AuthErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", AuthErrStr, err.Kind()))
+	if err.Kind() != httperror.AuthErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.AuthErrStr, err.Kind()))
 	}
 }
 
@@ -56,10 +58,10 @@ func TestForbiddenErr(t *testing.T) {
 	innerMsg := "Inner Testing ForbiddenErr Error"
 	originalErr := errors.New(innerMsg)
 
-	err := ForbiddenErr(msg, op, originalErr)
+	err := httperror.ForbiddenErr(msg, op, originalErr)
 
-	if err.Kind() != ForbiddenErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", ForbiddenErrStr, err.Kind()))
+	if err.Kind() != httperror.ForbiddenErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.ForbiddenErrStr, err.Kind()))
 	}
 }
 
@@ -69,10 +71,10 @@ func TestNotFoundErr(t *testing.T) {
 	innerMsg := "Inner Testing NotFoundErr Error"
 	originalErr := errors.New(innerMsg)
 
-	err := NotFoundErr(msg, op, originalErr)
+	err := httperror.NotFoundErr(msg, op, originalErr)
 
-	if err.Kind() != NotFoundErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", NotFoundErrStr, err.Kind()))
+	if err.Kind() != httperror.NotFoundErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.NotFoundErrStr, err.Kind()))
 	}
 }
 
@@ -82,10 +84,10 @@ func TestResorceLockedErr(t *testing.T) {
 	innerMsg := "Inner Testing ResorceLockedErr Error"
 	originalErr := errors.New(innerMsg)
 
-	err := ResorceLockedErr(msg, op, originalErr)
+	err := httperror.ResorceLockedErr(msg, op, originalErr)
 
-	if err.Kind() != ResorceLockedErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", ResorceLockedErrStr, err.Kind()))
+	if err.Kind() != httperror.ResorceLockedErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.ResorceLockedErrStr, err.Kind()))
 	}
 }
 
@@ -95,28 +97,28 @@ func TestUnknownErr(t *testing.T) {
 	innerMsg := "Inner Testing UnknownErr Error"
 	originalErr := errors.New(innerMsg)
 
-	err := UnknownErr(msg, op, originalErr)
+	err := httperror.UnknownErr(msg, op, originalErr)
 
-	if err.Kind() != UnknownErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", UnknownErrStr, err.Kind()))
+	if err.Kind() != httperror.UnknownErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.UnknownErrStr, err.Kind()))
 	}
 }
 
 func TestNotImplementedErr(t *testing.T) {
 	op := "TestNotImplementedErr"
-	err := NotImplementedErr(op)
+	err := httperror.NotImplementedErr(op)
 
-	if err.Kind() != NotImplementedErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", NotImplementedErrStr, err.Kind()))
+	if err.Kind() != httperror.NotImplementedErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.NotImplementedErrStr, err.Kind()))
 	}
 }
 
 func TestDeprecated(t *testing.T) {
 	op := "TestDeprecated"
-	err := Deprecated(op)
+	err := httperror.Deprecated(op)
 
-	if err.Kind() != DeprecatedErrStr {
-		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", DeprecatedErrStr, err.Kind()))
+	if err.Kind() != httperror.DeprecatedErrStr {
+		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Kind", httperror.DeprecatedErrStr, err.Kind()))
 	}
 }
 
@@ -126,7 +128,7 @@ func TestCatchErr(t *testing.T) {
 	innerMsg := "Inner Testing CatchErr Error"
 	originalErr := errors.New(innerMsg)
 
-	err := CatchErr(UnknownErr(msg, op, originalErr), op)
+	err := httperror.CatchErr(httperror.UnknownErr(msg, op, originalErr), op)
 
 	if err.Trace().InnerMessage != innerMsg {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Error Trace Message", msg, err.Trace().InnerMessage))

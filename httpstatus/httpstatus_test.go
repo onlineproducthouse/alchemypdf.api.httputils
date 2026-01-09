@@ -1,13 +1,14 @@
-package alchemypdfapihttputils
+package httpstatus_test
 
 import (
 	"testing"
 
 	"github.com/onlineproducthouse/alchemypdf.api.httputils/helpers/asserterrmsg"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
 )
 
 func TestOk(t *testing.T) {
-	statusCode, message := Ok()
+	statusCode, message := httpstatus.Ok()
 
 	if statusCode != 200 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 200, statusCode))
@@ -18,7 +19,7 @@ func TestOk(t *testing.T) {
 	}
 }
 func TestBadRequest(t *testing.T) {
-	statusCode, message := BadRequest()
+	statusCode, message := httpstatus.BadRequest()
 
 	if statusCode != 400 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 400, statusCode))
@@ -29,7 +30,7 @@ func TestBadRequest(t *testing.T) {
 	}
 }
 func TestUnauthorized(t *testing.T) {
-	statusCode, message := Unauthorized()
+	statusCode, message := httpstatus.Unauthorized()
 
 	if statusCode != 401 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 401, statusCode))
@@ -40,7 +41,7 @@ func TestUnauthorized(t *testing.T) {
 	}
 }
 func TestForbidden(t *testing.T) {
-	statusCode, message := Forbidden()
+	statusCode, message := httpstatus.Forbidden()
 
 	if statusCode != 403 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 403, statusCode))
@@ -51,7 +52,7 @@ func TestForbidden(t *testing.T) {
 	}
 }
 func TestNotFound(t *testing.T) {
-	statusCode, message := NotFound()
+	statusCode, message := httpstatus.NotFound()
 
 	if statusCode != 404 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 404, statusCode))
@@ -62,7 +63,7 @@ func TestNotFound(t *testing.T) {
 	}
 }
 func TestLocked(t *testing.T) {
-	statusCode, message := Locked()
+	statusCode, message := httpstatus.Locked()
 
 	if statusCode != 423 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 423, statusCode))
@@ -73,7 +74,7 @@ func TestLocked(t *testing.T) {
 	}
 }
 func TestInternalServerError(t *testing.T) {
-	statusCode, message := InternalServerError()
+	statusCode, message := httpstatus.InternalServerError()
 
 	if statusCode != 500 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 500, statusCode))
@@ -84,7 +85,7 @@ func TestInternalServerError(t *testing.T) {
 	}
 }
 func TestNotImplementedError(t *testing.T) {
-	statusCode, message := NotImplementedError()
+	statusCode, message := httpstatus.NotImplementedError()
 
 	if statusCode != 501 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 501, statusCode))
@@ -95,7 +96,7 @@ func TestNotImplementedError(t *testing.T) {
 	}
 }
 func TestDeprecatedError(t *testing.T) {
-	statusCode, message := DeprecatedError()
+	statusCode, message := httpstatus.DeprecatedError()
 
 	if statusCode != 410 {
 		t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("HTTP Status Code", 410, statusCode))
