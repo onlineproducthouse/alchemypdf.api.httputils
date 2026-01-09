@@ -12,7 +12,7 @@ go get github.com/onlineproducthouse/alchemypdf.api.httputils
 Import the package:
 
 ```go
-import "github.com/onlineproducthouse/alchemypdf.api.httputils"
+import alchemypdfapihttputils "github.com/onlineproducthouse/alchemypdf.api.httputils"
 ```
 
 Call a method:
