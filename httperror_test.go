@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"alchemypdf.api.httputils/helpers/asserterrmsg"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/helpers/asserterrmsg"
 )
 
 func TestValidationErr(t *testing.T) {
