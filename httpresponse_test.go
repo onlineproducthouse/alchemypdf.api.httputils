@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"alchemypdf-api-httputils/helpers/asserterrmsg"
+	"alchemypdf.api.httputils/helpers/asserterrmsg"
 )
 
 func TestResponseDefault(t *testing.T) {

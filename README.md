@@ -4,7 +4,7 @@
 
 run:
 ```bash
-go get package github.com/onlineproducthouse/alchemypdf-api-httputils
+go get github.com/onlineproducthouse/alchemypdf.api.httputils
 ```
 
 ## Usage
@@ -12,7 +12,7 @@ go get package github.com/onlineproducthouse/alchemypdf-api-httputils
 Import the package:
 
 ```go
-import "github.com/onlineproducthouse/alchemypdf-api-httputils"
+import "github.com/onlineproducthouse/alchemypdf.api.httputils"
 ```
 
 Call a method:

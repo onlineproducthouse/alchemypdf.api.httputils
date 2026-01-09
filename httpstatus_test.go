@@ -3,7 +3,7 @@ package alchemypdfapihttputils
 import (
 	"testing"
 
-	"alchemypdf-api-httputils/helpers/asserterrmsg"
+	"alchemypdf.api.httputils/helpers/asserterrmsg"
 )
 
 func TestOk(t *testing.T) {
