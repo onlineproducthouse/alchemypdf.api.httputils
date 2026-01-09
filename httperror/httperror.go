@@ -30,6 +30,11 @@ type AppError struct {
 	err            error
 }
 
+type Trace struct {
+	InnerMessage string
+	Ops          []string
+}
+
 func ValidationErr(msg, op string, err error) *AppError {
 	code, _ := httpstatus.BadRequest()
 	return &AppError{ValidationErrStr, msg, op, code, err}
@@ -93,11 +98,6 @@ func (a *AppError) Error() string {
 
 func (a *AppError) OriginalErr() error {
 	return a.err
-}
-
-type Trace struct {
-	InnerMessage string
-	Ops          []string
 }
 
 func (a *AppError) Trace() Trace {
