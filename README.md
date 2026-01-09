@@ -4,7 +4,7 @@
 
 run:
 ```bash
- $ go get package github.com/onlineproducthouse/alchemypdf-api-httputils
+go get package github.com/onlineproducthouse/alchemypdf-api-httputils
 ```
 
 ## Usage
@@ -23,8 +23,8 @@ statusCode, statusCodeText := alchemypdfapihttputils.Ok()
 ## Unit tests
 
 ```bash
-$ go test ./... -coverprofile=coverage-util.out
-$ go tool cover -html=coverage-util.out
+go test ./... -coverprofile=coverage-util.out
+go tool cover -html=coverage-util.out
 ```
 
 ## About
