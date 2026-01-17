@@ -1,4 +1,4 @@
-package httpresponse
+package httpresponseutil
 
 type Response struct {
 	Message    string `json:"message"`

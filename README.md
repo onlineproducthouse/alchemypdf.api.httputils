@@ -13,16 +13,16 @@ Import the package:
 
 ```go
 import (
-  "github.com/onlineproducthouse/alchemypdf.api.httputils/httperror"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httperrorutil"
   "github.com/onlineproducthouse/alchemypdf.api.httputils/httprequtil"
-  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpresponse"
-  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpresponseutil"
+  "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatusutil"
 )
 ```
 
 Call a method:
 ```go
-statusCode, statusCodeText := httpstatus.Ok()
+statusCode, statusCodeText := httpstatusutil.Ok()
 ```
 
 ## Unit tests

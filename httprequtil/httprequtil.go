@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/onlineproducthouse/alchemypdf.api.httputils/httperror"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/httperrorutil"
 )
 
 type (
@@ -27,7 +27,7 @@ type (
 	}
 )
 
-func NewHTTPReqUtil(cfg HTTPReqUtilCfg) (*HTTPReqUtil, *httperror.AppError) {
+func NewHTTPReqUtil(cfg HTTPReqUtilCfg) (*HTTPReqUtil, *httperrorutil.AppError) {
 	const op = "NewHTTPReqUtil"
 
 	var payload io.Reader = nil
@@ -35,7 +35,7 @@ func NewHTTPReqUtil(cfg HTTPReqUtilCfg) (*HTTPReqUtil, *httperror.AppError) {
 	if cfg.Method == "POST" && cfg.Payload != nil {
 		reqJson, reqJsonErr := json.Marshal(cfg.Payload)
 		if reqJsonErr != nil {
-			return nil, httperror.UnknownErr(reqJsonErr.Error(), op, reqJsonErr)
+			return nil, httperrorutil.UnknownErr(reqJsonErr.Error(), op, reqJsonErr)
 		}
 
 		payload = bytes.NewBuffer(reqJson)
@@ -43,7 +43,7 @@ func NewHTTPReqUtil(cfg HTTPReqUtilCfg) (*HTTPReqUtil, *httperror.AppError) {
 
 	req, reqErr := http.NewRequest(cfg.Method, cfg.URL, payload)
 	if reqErr != nil {
-		return nil, httperror.UnknownErr(reqErr.Error(), op, reqErr)
+		return nil, httperrorutil.UnknownErr(reqErr.Error(), op, reqErr)
 	}
 
 	if cfg.ContentType == "" {
@@ -59,21 +59,21 @@ func (svc HTTPReqUtil) SetHeader(key, value string) {
 	svc.req.Header.Set(key, value)
 }
 
-func (svc HTTPReqUtil) Execute() (*http.Response, []byte, *httperror.AppError) {
+func (svc HTTPReqUtil) Execute() (*http.Response, []byte, *httperrorutil.AppError) {
 	const op = "HTTPReqUtil.Execute"
 
 	client := &http.Client{Timeout: 0}
 
 	executeResp, executeRespErr := client.Do(svc.req)
 	if executeRespErr != nil {
-		return nil, nil, httperror.UnknownErr(executeRespErr.Error(), op, executeRespErr)
+		return nil, nil, httperrorutil.UnknownErr(executeRespErr.Error(), op, executeRespErr)
 	}
 
 	defer executeResp.Body.Close()
 
 	respBody, respBodyErr := io.ReadAll(executeResp.Body)
 	if respBodyErr != nil {
-		return nil, nil, httperror.UnknownErr(respBodyErr.Error(), op, respBodyErr)
+		return nil, nil, httperrorutil.UnknownErr(respBodyErr.Error(), op, respBodyErr)
 	}
 
 	return executeResp, respBody, nil

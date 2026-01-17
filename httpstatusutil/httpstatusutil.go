@@ -1,4 +1,4 @@
-package httpstatus
+package httpstatusutil
 
 func Ok() (int, string) {
 	return 200, "Ok"

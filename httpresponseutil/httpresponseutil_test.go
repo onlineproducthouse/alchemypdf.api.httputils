@@ -1,15 +1,15 @@
-package httpresponse_test
+package httpresponseutil_test
 
 import (
 	"fmt"
 	"testing"
 
 	"github.com/onlineproducthouse/alchemypdf.api.httputils/helpers/asserterrmsg"
-	"github.com/onlineproducthouse/alchemypdf.api.httputils/httpresponse"
+	"github.com/onlineproducthouse/alchemypdf.api.httputils/httpresponseutil"
 )
 
 func TestResponseDefault(t *testing.T) {
-	_testCases := []httpresponse.Response{
+	_testCases := []httpresponseutil.Response{
 		{"Ok", 200},
 		{"Bad Request", 400},
 		{"Unauthorized", 401},
@@ -21,7 +21,7 @@ func TestResponseDefault(t *testing.T) {
 
 	for _, expect := range _testCases {
 		t.Run(fmt.Sprintf("HTTP Response %s", expect.Message), func(t *testing.T) {
-			got := httpresponse.Default(expect.Message, expect.StatusCode)
+			got := httpresponseutil.Default(expect.Message, expect.StatusCode)
 
 			if got.Message != expect.Message {
 				t.Errorf("%s", asserterrmsg.BuildAssertErrorMessage("Message", expect.Message, got.Message))
@@ -36,6 +36,6 @@ func TestResponseDefault(t *testing.T) {
 
 func BenchmarkResponseDefault(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		httpresponse.Default("Ok", 200)
+		httpresponseutil.Default("Ok", 200)
 	}
 }

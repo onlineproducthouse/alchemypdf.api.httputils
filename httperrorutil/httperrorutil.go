@@ -1,6 +1,6 @@
-package httperror
+package httperrorutil
 
-import "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatus"
+import "github.com/onlineproducthouse/alchemypdf.api.httputils/httpstatusutil"
 
 const (
 	NoErrStr             string = "Ok"                  // status 200
@@ -36,22 +36,22 @@ type Trace struct {
 }
 
 func ValidationErr(msg, op string, err error) *AppError {
-	code, _ := httpstatus.BadRequest()
+	code, _ := httpstatusutil.BadRequest()
 	return &AppError{ValidationErrStr, msg, op, code, err}
 }
 
 func AuthErr(msg, op string, err error) *AppError {
-	code, _ := httpstatus.Unauthorized()
+	code, _ := httpstatusutil.Unauthorized()
 	return &AppError{AuthErrStr, msg, op, code, err}
 }
 
 func ForbiddenErr(msg, op string, err error) *AppError {
-	code, _ := httpstatus.Forbidden()
+	code, _ := httpstatusutil.Forbidden()
 	return &AppError{ForbiddenErrStr, msg, op, code, err}
 }
 
 func NotFoundErr(msg, op string, err error) *AppError {
-	code, text := httpstatus.NotFound()
+	code, text := httpstatusutil.NotFound()
 
 	if msg != "" {
 		text = msg
@@ -61,22 +61,22 @@ func NotFoundErr(msg, op string, err error) *AppError {
 }
 
 func ResorceLockedErr(msg, op string, err error) *AppError {
-	code, _ := httpstatus.Locked()
+	code, _ := httpstatusutil.Locked()
 	return &AppError{ResorceLockedErrStr, msg, op, code, err}
 }
 
 func UnknownErr(msg, op string, err error) *AppError {
-	code, _ := httpstatus.InternalServerError()
+	code, _ := httpstatusutil.InternalServerError()
 	return &AppError{UnknownErrStr, msg, op, code, err}
 }
 
 func NotImplementedErr(op string) *AppError {
-	code, text := httpstatus.NotImplementedError()
+	code, text := httpstatusutil.NotImplementedError()
 	return &AppError{NotImplementedErrStr, text, op, code, nil}
 }
 
 func Deprecated(op string) *AppError {
-	code, text := httpstatus.DeprecatedError()
+	code, text := httpstatusutil.DeprecatedError()
 	return &AppError{DeprecatedErrStr, text, op, code, nil}
 }
 
